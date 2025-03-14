@@ -54,8 +54,7 @@ export default class RedisCommandsQueue {
 
     #decoder = new RESP2Decoder({
         returnStringsAsBuffers: () => {
-            return !!this.#waitingForReply.head?.value.returnBuffers ||
-                this.#pubSub.isActive;
+            return true;
         },
         onReply: reply => {
             if (this.#pubSub.isActive && Array.isArray(reply)) {
